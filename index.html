@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Mélo</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <aside id="side">
+    <div class="brand"><svg viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1014 17V7h4V3h-6z"/></svg>Mélo</div>
+    <nav>
+      <button data-view="library">Bibliothèque</button>
+      <button data-view="liked">Titres likés</button>
+    </nav>
+    <div class="side-head"><span>Playlists</span><button id="newPl" class="icon" aria-label="Nouvelle playlist"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button></div>
+    <div id="plList"></div>
+    <div class="side-foot">
+      <button class="btn" id="importBtn">Importer (MP3 ou sauvegarde)</button>
+      <button class="btn" id="exportBtn">Exporter tout</button>
+      <div id="usage"></div>
+      <input type="file" id="fileIn" multiple hidden>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <button id="menuBtn" class="icon" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+      <input id="search" type="search" placeholder="Rechercher un titre, un artiste…" aria-label="Rechercher">
+    </header>
+    <div id="view"></div>
+  </main>
+
+  <footer id="player" hidden>
+    <button id="collapse" class="icon" aria-label="Réduire"></button>
+    <div id="np">
+      <div id="npCover" class="cover"></div>
+      <div class="meta"><div id="npTitle" class="title"></div><div id="npArtist" class="sub"></div></div>
+      <button id="npLike" class="icon" aria-label="J'aime"></button>
+    </div>
+    <div class="ctrl">
+      <div class="btns">
+        <button id="shuf" class="icon" aria-label="Aléatoire"></button>
+        <button id="prev" class="icon" aria-label="Précédent"></button>
+        <button id="play" aria-label="Lecture"></button>
+        <button id="next" class="icon" aria-label="Suivant"></button>
+        <button id="rep" class="icon" aria-label="Répéter"></button>
+      </div>
+      <div class="seek"><span id="cur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" aria-label="Position"><span id="dur">0:00</span></div>
+    </div>
+    <div class="vol"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 8v8a4.5 4.5 0 002.5-4z"/></svg><input type="range" id="vol" min="0" max="1" step="0.01" aria-label="Volume"></div>
+  </footer>
+
+  <dialog id="dlg"></dialog>
+  <div id="toast" hidden></div>
+</body>
+</html>
