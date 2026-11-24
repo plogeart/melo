@@ -423,6 +423,26 @@ addEventListener('keydown', e => {
   if (e.code === 'Space' && !e.target.closest('input, textarea, button, dialog')) { e.preventDefault(); togglePlay(); }
 });
 
+// Link -> MP3, done by convert_server.py running on this PC (see README).
+const CONVERTER = 'http://127.0.0.1:8777';
+$('#linkForm').onsubmit = async e => {
+  e.preventDefault();
+  const input = $('#linkUrl'), url = input.value.trim();
+  toast('Conversion en cours…');
+  try {
+    const r = await fetch(CONVERTER + '/convert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url }) });
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || r.statusText);
+    const name = decodeURIComponent(r.headers.get('X-Filename') || 'son.mp3');
+    navigator.storage?.persist?.();
+    await addAudio(new File([await r.blob()], name, { type: 'audio/mpeg' }), name);
+    input.value = '';
+    go('library');
+    toast('Ajouté à la bibliothèque ✓');
+  } catch (err) {
+    toast(err instanceof TypeError ? 'Convertisseur introuvable : lance convertisseur.bat sur ton PC' : 'Échec : ' + err.message);
+  }
+};
+
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 
 for (const s of await getAll('songs')) S.songs.set(s.id, s);

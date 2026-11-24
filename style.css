@@ -38,6 +38,10 @@ header { position: sticky; top: 0; z-index: 5; display: flex; gap: 8px; padding:
 .hero h1 { font-size: clamp(28px, 6vw, 64px); margin: 4px 0 8px; line-height: 1.05; overflow-wrap: anywhere; }
 .hero small, .hero p { color: var(--sub); margin: 0; }
 .hero small { text-transform: uppercase; font-weight: 700; font-size: 12px; }
+#linkForm { display: flex; gap: 8px; margin-left: auto; flex: 0 1 380px; }
+#linkForm input { flex: 1; min-width: 0; padding: 9px 16px; border-radius: 999px; border: 1px solid #333; background: #181818; color: var(--text); font: inherit; }
+/* The converter runs on the PC, so the field is PC-only. */
+@media (max-width: 760px), (pointer: coarse) { #linkForm { display: none; } }
 .cover { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; background: #333; display: grid; place-items: center; color: var(--sub); flex-shrink: 0; }
 .cover.big { width: clamp(120px, 22vw, 220px); height: clamp(120px, 22vw, 220px); box-shadow: 0 8px 40px rgba(0, 0, 0, .5); }
 .cover.big svg { width: 40%; height: 40%; }
